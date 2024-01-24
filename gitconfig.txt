@@ -1,0 +1,3 @@
+[user]
+	name = ZiaKhan2008
+	email = khansokan1234@gmail.com

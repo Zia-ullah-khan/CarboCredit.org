@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XRP Web App</title>
+    <script src="https://unpkg.com/xrpl/build/xrpl-latest-min.js"></script>;
+</script>
+
+</head>
+<body>
+
+    <h2>Send XRP:</h2>
+    <form id="sendForm" action="/send" method="POST">
+        <label for="standby_amount">Amount:</label>
+        <input type="text" id="standby_amount" name="standby_amount" required><br><br>
+        <label for="standby_destination">Destination:</label>
+        <input type="text" id="standby_destination" name="standby_destination" required><br><br>
+        <p id="youraccount"></p>
+        <button type="button" id="sendXrpButton">Send XRP</button>
+    </form>
+
+    <div class="results">
+        <h2>Results:</h2>
+        <p id="result"></p>
+        <p id="transaction"></p>
+        <h2>Networks</h2>
+        <input type="radio" id="tn" name="network" value="testnet">
+        <input type="radio" id="dn" name="network" value="devnet">
+        <input type="radio" id="mn" name="network" value="mainnet">
+
+    </div>
+
+    <script src="https://unpkg.com/xrpl/build/xrpl-latest-min.js"></script>>
+    <script>
+
+ 
+        // JavaScript code here
+        // Ensure that the XRPL library is loaded before using it
+
+        // Add your JavaScript code for XRPL interactions here
+        
+        // Add event listeners and functionality for the buttons and form
+        document.getElementById("sendXrpButton").addEventListener("click", sendXRP);
+
+
+
+    function getNet() {
+        let net
+        if (document.getElementById("tn").checked) net = "wss://s.altnet.rippletest.net:51233"
+        if (document.getElementById("dn").checked) net = "wss://s.devnet.rippletest.net:51233"
+        if (document.getElementById("mn").checked) net = "wss://xrplcluster.com/"
+    return net}
+async function sendXRP() {
+
+
+        //wallet = "Nice"
+
+        let net = getNet();
+        
+        const client = new xrpl.Client(net);
+        await client.connect();
+
+        const fund_result = await client.fundWallet()
+        const test_wallet = fund_result.wallet
+        console.log(fund_result)
+
+
+        document.getElementById("result").innerText = test_wallet;
+        document.getElementById("youraccount").innerText = test_wallet;
+        let results = "Connecting to the selected ledger.\n";
+        results = 'Connecting to ' + getNet() + '....';
+        document.getElementById("result").innerText = test_wallet.address;
+        document.getElementById("result").innerText = results    
+
+
+
+
+        const getaccoutindo = {
+        "id": 2,
+        "command": "account_info",
+        "account": test_wallet,
+        "ledger_index": "current",
+        "queue": true
+        }
+        send = JSON.stringify(getaccoutindo, null, 2);
+        results += "\nConnected. Sending XRP.\n";
+        document.getElementById("transaction").innerText = results;
+
+        results += "\nstandby_wallet.address: = " + test_wallet.address;
+        document.getElementById("result").innerText = results;
+
+        let tx; // Declare tx here
+
+
+
+
+    const transactionPayload = await client.autofill({
+        "TransactionType": "Payment",
+        "Account": test_wallet.address,
+        "Amount": xrpl.xrpToDrops(document.getElementById("standby_amount").value),
+        "Destination": document.getElementById("standby_destination").value
+    });
+        const signed = test_wallet.sign(transactionPayload)
+        console.log(signed)
+
+        results += "\nBalance changes: " + JSON.stringify(xrpl.getBalanceChanges(test_wallet.address), null, 2);
+        document.getElementById("result").innerText = results;
+
+        const balance = await client.getXrpBalance(accountkey);
+        document.getElementById("result").innerText = "Balance: " + balance;
+
+        client.disconnect();
+    }
+
+    </script>
+</body>
+</html>

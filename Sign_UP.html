@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <meta name="viewport" content="width=device-width height=device-height"> 
+    <link rel="shortcut icon" type="image/jpg" href="logo.jpg" />
+
+        <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            //background-color: #f6fcf0;
+            flex-direction: column; /* Center elements vertically */
+        }
+
+        h1 {
+            color: black; /* Adjust the text color */
+            font-size: 36px;
+        }
+
+        form {
+            display: none;
+            text-align: center;
+            background-color: #92cd81;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 2px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: rgb(16, 24, 74);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        label#Print {
+            color: red;
+            font-weight: bold;
+        }
+        #welcome {
+            color: black;
+            font-size: 36px;
+            animation: slideDown 1s ease-in-out;
+            transition: top 1s ease-in-out;
+        }
+        #welcome2 {
+            color: black;
+            font-size: 36px;
+        }
+#logo {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+    /* Keyframes for fading in the form */
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+</style>
+    </style>
+</head>
+<body>
+
+    <h1 id="WELCOME">Welcome to CarboCredit!</h1>
+
+    <script src="https://xumm.app/assets/cdn/xumm.min.js"></script>
+    <img id="logo" src="logo.jpg" alt="logo" />
+    <h1 id="welcome2">Welcome to CarboCredit!</h1>
+<form id="loginForm"  onsubmit="runXummScript()" action="/includes/checkcredintials.inc.php" method="POST" >
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" ><br><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" ><br><br>
+
+    <!-- Add an email input field -->
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" ><br><br>
+    <label id = "address">Address</label>
+    <h2> Please Select the Account Type </h2>
+    <input type="radio" id="CarboDucer" name="AccountType" value="CarboDucer">
+    <label for="CarboDucer">CarboDucer</label>
+    <input type="radio" id="CarboReducer" name="AccountType" value="CarboReducer">
+    <label for="CarboReducer">CarboReducer</label><br>
+    
+
+
+
+    <input type="submit" value="Login" id="submit">
+</form>
+
+<div id="accountaddress">Account Address Will Appear Here</div>
+
+    <script>
+        document.getElementById("loginForm").style.display = "none";
+        document.getElementById("WELCOME").style.animation = 'fadeOut 2s forwards';
+
+        document.getElementById("loginForm").style.display = "none";
+        document.getElementById("welcome2").style.display="none";
+        document.getElementById("WELCOME").style.top = "100%";
+
+
+        document.getElementById("WELCOME").style.display = 'none';
+        document.getElementById("loginForm").style.display = 'block';
+        document.getElementById("welcome2").style.display = 'block';
+        document.getElementById("loginForm").style.animation = 'fadeIn 2s forwards';
+        
+        
+            //
+
+        // Check if there is an error message in the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get("error");
+
+        if (error === "noerror") {
+            window.href.location("/includes/loginhandler.inc.php")
+        }
+        //if (error === "emailnottaken") {
+            // Email is already taken, display an error message
+            //const errorMessage = document.createElement("p");
+            //errorMessage.textContent = "Email has not been registered please signup";
+            //errorMessage.style.color = "red";
+            //document.body.appendChild(errorMessage);
+        //}
+
+</script>
+
+
+
+<script>
+    // Placeholder variable to store the user's XRP address
+    var userXRPAddress = '';
+
+    // Function to populate the XRP address field in the form
+    function populateXRPAddress() {
+        localStorage.setItem('email', document.getElementById("email").value)
+        var xumm = new Xumm('1e9144b6-adcf-45ac-bc96-930311f872eb'); // Replace with your Xumm App ID
+        xumm.logout();
+
+        xumm.on("ready", () => console.log("Ready (e.g. hide loading state of xApp)"));
+        setTimeout(function() {
+        xumm.authorize();
+        }, 10500);
+
+        xumm.on("success", async () => {
+            xumm.user.account.then(account => {
+                userXRPAddress = account; // Store the user's XRP address
+                document.getElementById('accountaddress').innerText = userXRPAddress;
+
+                // Automatically fill the input field with the address
+                var addressInput = document.getElementById('address2');
+                addressInput.value = userXRPAddress;
+            });
+        });
+
+        xumm.on("logout", async () => {
+                var addressInput = document.getElementById('address2');
+                addressInput.value = userXRPAddress;
+        })
+
+        xumm.user.account.then(account => {
+            document.getElementById('accountaddress').innerText = account;
+        });
+    }
+
+    // Call the function to populate the XRP address
+    populateXRPAddress();
+</script>
+
+
+
+</script>
+
+
+
+</body>
+</html>

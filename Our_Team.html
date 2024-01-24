@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/jpg" href="logo.jpg" />
+    <title>Our Team</title>
+    <style>
+        .topnav {
+            
+  background-color: #f2fdef;
+  overflow: hidden;
+  color: black;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    color: black;
+  float: left;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+
+/* Add a color to the active/current link */
+.topnav a:hover {
+  background-color: #04AA6D;
+  color: white;
+
+}
+body {
+  background-image: url('CC_Background_img.jpeg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+#logo{
+    width: 45px;
+    float: left;
+    background-color: #f2fdef;
+}
+#login{
+    float: right;
+}
+#Sign_UP{
+    float: right;
+}
+#Out_Team{
+    float: left;
+    padding: 14px 16px;
+}
+
+/* Style navigation menu links */
+.topnav a {
+  color: black;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+/* Add a grey background color on mouse-over */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Style the active link (or home/logo) */
+.active {
+  background-color: #04AA6D;
+  color: black;
+}
+
+/* Style the hamburger menu icon */
+.topnav a.icon {
+  display: block;
+  float: left; /* Change float to left */
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+/* Media query for larger screens */
+@media screen and (min-width: 601px) {
+    .topnav a.icon {
+        display: none;
+    }
+
+    .topnav #myLinks {
+        display: block;
+    }
+}
+
+/* Adjust the position of the mobile menu */
+/* Add this media query for mobile screens */
+@media screen and (max-width: 600px) {
+    .topnav a.icon {
+        overflow: visible;
+        text-align: right;
+        float: right;
+    }
+
+    .topnav #myLinks {
+        display: none;
+        position: absolute;
+        top: 60px; /* Adjust the distance from the top as needed */
+        left: 0;
+        width: 100%;
+        background-color: #f2fdef;
+        z-index: 1;
+    }
+
+    .topnav #myLinks a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+}
+
+
+section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-evenly; /* Change space-around to space-evenly */
+    padding: 2em;
+}
+
+.team-member {
+    flex: 0 0 calc(33.33% - 2em); /* Adjust the width calculation */
+    margin: 1em;
+    padding: 1em;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.team-member img {
+    width: 100%; /* Ensure images scale properly on smaller screens */
+    height: auto;
+    border-radius: 4px;
+}
+
+.member-info p {
+    margin-bottom: 0.5em; /* Add some spacing between paragraphs for readability */
+}
+    </style>
+</head>
+<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <div class="topnav">
+        <img id="logo" src="logo.jpg" alt="logo" />
+        <!-- Navigation links (hidden by default) -->
+        <div id="myLinks"> 
+            <a href="index">Home</a>
+            <a href="#contact">Contact</a>
+            <a href="About_us">About Us</a>
+            <a id="Sign_UP" href="SignUP">Sign up</a>
+            <a id="login" href="Login">Login</a>
+        </div>
+        <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+
+    <section>
+        <div class="team-member">
+            <img src="Daniel_Picture.jpeg" alt="Daniel's Picture">
+            <div class="member-info">
+                <h2>Daniel Healey</h2>
+                <p>Director of External Investor Relations</p>
+                <p>Email: daniel.f.healey@carbocredit.org</p>
+                <p>Phone: +1 (516) 680-3547</p>
+            </div>
+        </div>
+
+        <div class="team-member">
+            <img src="Shakir_Picture.jpg" alt="Shakir's Picture">
+            <div class="member-info">
+                <h2>Shakir Ullah</h2>
+                <p>Strategic Advisor</p>
+                <p>Email: shakir.ullah@carbocredit.org</p>
+                <p>Phone: +1 202-344-7799</p>
+            </div>
+        </div>
+        <br><br>
+        <div class="team-member">
+            <img src="Zia_Picture.jpg" alt="Shakir's Picture">
+            <div class="member-info">
+                <h2>Zia Ullah Khan</h2>
+                <p>Chief Architect and Software Engineer</p>
+                <p>Email: Zia.Khan@carbocredit.org</p>
+                <p>Phone: +1 3186901669</p>
+            </div>
+        </div>
+
+    </section>
+        <script>
+        function myFunction() {
+            var x = document.getElementById("myLinks");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>

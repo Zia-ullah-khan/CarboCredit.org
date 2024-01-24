@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Upload</title>
+  <style>
+    /* Add your CSS styling here */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>File Upload</h1>
+  <form action="includes/upload.inc.php" method="post" enctype="multipart/form-data" onsubmit="return validatePictureCount()">
+<!-- Add 'for' and 'id' attributes for better accessibility -->
+<label for="name">Enter Name:</label>
+<input type="text" id="name" name="name" required><br>
+
+<label for="location">Enter Location:</label>
+<input type="text" id="location" name="location" required><br>
+
+<label for="O_Name">Enter Owner's Name:</label>
+<input type="text" id="O_Name" name="owner_name" required><br>
+
+<label for="file">Select Pictures to Upload (JPEG, PNG):</label>
+<input type="file" id="file" name="file[]" accept="image/jpeg, image/png" multiple required>
+<span id="error-message" style="color: red;"></span>
+
+<button type="submit" name="submit" >Upload Files</button>
+
+  </form>
+
+<form action="/includes/upload.inc.php" method="post" enctype="multipart/form-data">
+    <label for="file">Select File to Upload:</label>
+    <input type="file" id="file" name="file" accept="image/jpeg, image/png" multiple required>
+    <br>
+    <button type="submit">Upload File</button>
+  </form>
+
+  <script>
+    function validatePictureCount() {
+      const files = document.getElementById('file').files;
+      if (files.length < 5) {
+        document.getElementById('error-message').textContent = "Please upload at least 5 pictures.";
+        return false; // Prevent form submission
+      }
+      return true; // Allow form submission
+    }
+  </script>
+</body>
+</html>

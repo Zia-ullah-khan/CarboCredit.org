@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CarboCredit.org">
+    <link rel="shortcut icon" type="image/jpg" href="logo.jpg" />
+    <title>Landing Page</title>
+    <style>
+        .badge {
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            font-size: 12px;
+        }
+        #bell{
+            width: 15px;
+            height: 15px;
+        }
+        .topnav {
+            
+  background-color: #f2fdef;
+  overflow: hidden;
+  color: black;
+}
+P{
+    color:#36454F;
+}
+h1{
+    color: #36454F;
+}
+ol{
+    color: #36454F;
+}
+h2{
+    color: #36454F;
+}
+/* Style the links inside the navigation bar */
+.topnav a {
+    color: black;
+  float: left;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+
+/* Add a color to the active/current link */
+.topnav a:hover {
+  background-color: #04AA6D;
+  color: white;
+
+}
+body {
+  background-image: url('CC_Background_img.jpeg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+#logo{
+    width: 45px;
+    float: left;
+    background-color: #f2fdef;
+}
+#login{
+    float: right;
+}
+#SignUP{
+    float: right;
+}
+
+/* Style navigation menu links */
+.topnav a {
+  color: black;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+/* Add a grey background color on mouse-over */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Style the active link (or home/logo) */
+.active {
+  background-color: #04AA6D;
+  color: black;
+}
+
+/* Style the hamburger menu icon */
+.topnav a.icon {
+  display: block;
+  float: left; /* Change float to left */
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  cursor: pointer;
+}
+        #username {
+            text-align: center;
+            margin: 0; /* Reset default margin */
+        }
+
+        /* Additional style for the container of the welcome message */
+        #username-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+/* Media query for larger screens */
+@media screen and (min-width: 601px) {
+    .topnav a.icon {
+        display: none;
+    }
+}
+
+/* Adjust the position of the mobile menu */
+@media screen and (max-width: 600px) {
+    .topnav a.icon {
+        overflow: visible;
+        text-align: right;
+        float: right;
+    }
+
+    .topnav #myLinks {
+        display: none;
+        position: absolute;
+        top: 60px; /* Adjust the distance from the top as needed */
+        left: 0;
+        width: 100%;
+        background-color: #f2fdef;
+        z-index: 1;
+    }
+
+    .topnav #myLinks a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+}
+    </style>
+</head>
+<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- Top Navigation Menu -->
+    <div class="topnav">
+        <img id="logo" src="logo.jpg" alt="logo" />
+        <a href="notificaiton.html">
+<div class="notifications-bell" id="notificationsBell">
+    <img id="bell" src="bell-icon.png" alt="Notifications Bell">
+    <span class="badge" id="notificationsCount"></span>
+</div>
+</a>
+        <div id="myLinks">
+            <h3 id="username"></h3>
+            <a href="Our_Team">Our Team</a>
+            <a href="Contact_Us">Contact</a>
+            <a href="Current_Projects">Avabile Projects</a>
+            <a id="Sign_UP" href="Sign_UP">Sign up</a>
+            <a id="login" href="Login">Login</a>
+        </div>
+<a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <i class="fa fa-bars"></i>
+</a>
+</div>
+
+        <!-- Main Content -->
+    <div id="main-content">
+        <div id="welcome-section">
+            <h1>Welcome to CarboCredit</h1>
+            <p id="username-container">Trade carbon credits on the XRPL blockchain and contribute to a sustainable future.</p>
+        </div>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works">
+            <h2>How CarboCredit Works</h2>
+            <p>
+                CarboCredit allows individuals and businesses to trade carbon credits securely on the XRPL blockchain.
+                Here's a simple guide on how it works:
+            </p>
+            <ol>
+                <li>Create an account on CarboCredit.org.</li>
+                <li>Explore carbon credit listings and choose credits based on your sustainability goals.</li>
+                <li>Initiate a secure transaction using XRPL blockchain technology.</li>
+                <li>Monitor and verify your carbon credit transactions transparently on the blockchain.</li>
+                <li>Contribute to a greener planet by supporting sustainable initiatives.</li>
+            </ol>
+        </section>
+</div>
+    <script>
+        document.getElementById("username").innerHTML = "Welcome " + localStorage.getItem("username") + "!";
+function myFunction() {
+    var x = document.getElementById("myLinks");
+    if (x.style.display === "block" || x.style.display === "") {
+        x.style.display = "none";
+    } else {
+        x.style.display = "block";
+    }
+}
+
+    </script>
+    <script>
+    // Function to update the notifications bell count
+    function updateNotificationsCount(count) {
+        const badge = document.getElementById('notificationsCount');
+        badge.textContent = count;
+        badge.style.display = count > 0 ? 'block' : 'none';
+    }
+
+    // Fetch data from getData.php using JavaScript
+    fetch('includes/noti_system.inc.php')
+        .then(response => response.json())
+        .then(data => {
+
+        })
+        .catch(error => console.error('Error fetching data:', error));
+
+        var xhr = new XMLHttpRequest();
+xhr.open("POST", "/includes/noti_system.inc.php", true);
+xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+var requestData = "username=" + localStorage.getItem("username");
+
+xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+            console.log("Server response:", xhr.responseText);
+
+            // Try to parse the JSON response
+            try {
+                // Trim the response before parsing
+                var data = JSON.parse(xhr.responseText.trim());
+                console.log("Parsed data:", data);
+
+            // Display the data as an HTML table
+            let html = "<table><tr><th>ID</th><th>Message</th><th>Status</th></tr>";
+            data.forEach(row => {
+                if (row.hasOwnProperty('total')) {
+                    updateNotificationsCount(row.total);
+                }
+            });
+
+            } catch (error) {
+                console.error("Error parsing JSON:", error);
+            }
+        } else {
+            console.error("Error:", xhr.status, xhr.statusText);
+        }
+    }
+};
+xhr.send(requestData);
+</script>
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Page</title>
+    <meta name="viewport" content="width=device-width height=device-height">
+    <link rel="shortcut icon" type="image/jpg" href="logo.jpg" /> 
+    <style>
+        /* CSS styles for the page */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f6fcf0;
+            flex-direction: column; /* Center elements vertically */
+        }
+
+        h1 {
+            font-size: 36px;
+            color: black;
+        }
+
+        form {
+            text-align: center;
+            background-color: #92cd81;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        input[type="text"] {
+            color: #000 !important;
+            width: 100%;
+            padding: 2px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: rgb(16, 24, 74);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        label {
+            font-weight: bold;
+        }
+        #paymentContainer {
+    position: relative; /* Container for relative positioning */
+}
+#logo {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#paymentForm {
+    position: relative; /* Ensure the form stays in the flow */
+}
+
+#qrCode {
+    position: center; /* Position the QR code absolutely within the container */
+    top: 185px; /* Adjust the top position as needed */
+    left: 497px; /* Adjust the left position as needed */
+}
+
+        .badge {
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            font-size: 12px;
+        }
+        #bell{
+            width: 15px;
+            height: 15px;
+        }
+        .topnav {
+            
+  background-color: #f2fdef;
+  overflow: hidden;
+  color: black;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    color: black;
+  float: left;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+
+/* Add a color to the active/current link */
+.topnav a:hover {
+  background-color: #04AA6D;
+  color: white;
+
+}
+#logo{
+    width: 45px;
+    float: left;
+    background-color: #f2fdef;
+}
+#login{
+    float: right;
+}
+#SignUP{
+    float: right;
+}
+
+/* Style navigation menu links */
+.topnav a {
+  color: black;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+/* Add a grey background color on mouse-over */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Style the active link (or home/logo) */
+.active {
+  background-color: #04AA6D;
+  color: black;
+}
+
+/* Style the hamburger menu icon */
+.topnav a.icon {
+  display: block;
+  float: left; /* Change float to left */
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  cursor: pointer;
+}
+        #username {
+            text-align: center;
+            margin: 0; /* Reset default margin */
+        }
+
+        /* Additional style for the container of the welcome message */
+        #username-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+/* Media query for larger screens */
+@media screen and (min-width: 601px) {
+    .topnav a.icon {
+        display: none;
+    }
+
+    .topnav #myLinks {
+        display: block;
+    }
+}
+
+/* Adjust the position of the mobile menu */
+@media screen and (max-width: 600px) {
+    .topnav a.icon {
+        overflow: visible;
+        text-align: right;
+        float: right;
+    }
+
+    .topnav #myLinks {
+        display: none;
+        position: absolute;
+        top: 60px; /* Adjust the distance from the top as needed */
+        left: 0;
+        width: 100%;
+        background-color: #f2fdef;
+        z-index: 1;
+    }
+
+    .topnav #myLinks a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+}
+    </style>
+</head>
+<body>
+<!-- Top Navigation Menu -->
+    <div class="topnav">
+<a href="notificaiton.html">
+<div class="notifications-bell" id="notificationsBell">
+    <img id="bell" src="bell-icon.png" alt="Notifications Bell">
+    <span class="badge" id="notificationsCount"></span>
+</div>
+</a>
+        <!-- Navigation links (hidden by default) -->
+        <div id="myLinks">
+            <p id="username"></p>
+            <a href="Our_Team">Our Team</a>
+            <a href="Contact_Us">Contact</a>
+            <a href="About_us">About Us</a>
+        </div>
+        <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+</div>
+    <img id="logo" src="logo.jpg" alt="logo" />
+    <h1 id="title">Payment Page</h1>
+    <div class="topnav">
+        <img id="logo" src="logo.jpg" alt="logo" />
+
+    <div id="paymentConatiner">
+    <form id="paymentForm" onsubmit="createPayment(event)">
+        <!-- Input fields for payment details -->
+        <label for="Destination" id="DestinationLabel">Destination:</label>
+        <input type="text" id="Destination" required><br><br>
+
+        <label for="DestinationTag" id="DestinationTag">Destination Tag:</label>
+        <input type='text' id="Destination_Tag" name="DestinationTag"><br><br>
+
+        <label for="Amount" id="ammountablel">Carbon offset(in metric tons):</label>
+        <input type="text" id="Amount" name="Amount" required><br><br>
+        <img id="qrCode" alt="QR Code">
+
+        <input type="submit" value="Make Payment" id="submit">
+    </form>
+    </div>
+</div>
+    <script>
+        document.getElementById("username").innerHTML = "Welcome " + localStorage.getItem("username") + "!";
+        function myFunction() {
+            var x = document.getElementById("myLinks");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
+    </script>
+    <script>
+    // Function to update the notifications bell count
+    function updateNotificationsCount(count) {
+        const badge = document.getElementById('notificationsCount');
+        badge.textContent = count;
+        badge.style.display = count > 0 ? 'block' : 'none';
+    }
+
+    // Fetch data from getData.php using JavaScript
+    fetch('includes/noti_system.inc.php')
+        .then(response => response.json())
+        .then(data => {
+            // Display the data as an HTML table
+            let html = "<table><tr><th>ID</th><th>Message</th><th>Status</th></tr>";
+        })
+        .catch(error => console.error('Error fetching data:', error));
+</script>
+<script>
+        document.getElementById("username").innerHTML = "Welcome " + localStorage.getItem("username") + "!";
+
+        // Function to get the query parameter value from the URL
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    // Set the destination text box with the "publicKey" parameter from the URL
+    const destinationTextBox = document.getElementById("Destination");
+    const publicKeyFromURL = getQueryParam("publicKey");
+
+    // Set the amount text box with the "amount" parameter from the URL
+    const amountTextBox = document.getElementById("Amount");
+    const amountFromURL = getQueryParam("amount");
+    console.log(amountFromURL)
+
+    if (publicKeyFromURL) {
+        destinationTextBox.value = publicKeyFromURL;
+    }
+
+    if (amountFromURL) {
+        amountTextBox.value = amountFromURL;
+        
+
+
+    }
+
+
+
+const urlParams = new URLSearchParams(window.location.search);
+const error = urlParams.get("error");
+        if (error === "purchase_Shinkad") {
+            document.getElementById("title").innerText = "Purchase";
+            document.getElementById("Destination").style.display = "none";
+            document.getElementById("DestinationLabel").style.display = "none";
+            document.getElementById('Destination').removeAttribute('required');
+            document.getElementById("DestinationTag").style.display = "none";
+            document.getElementById("Destination_Tag").style.display = "none";
+            document.getElementById("ammountablel").innerText = "Amount of Carbon Credits";
+            document.getElementById("submit").value = "Purchase";
+        }
+    function createPayment(event) {
+        event.preventDefault();
+        // Send the username to the server using AJAX
+const urlParams = new URLSearchParams(window.location.search);
+const error = urlParams.get("error");
+
+var xhr = new XMLHttpRequest();
+xhr.open("POST", "/includes/update_noti.inc.php", true);
+xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+// Define the data to be sent in the AJAX request
+var requestData = "username=" + encodeURIComponent(localStorage.getItem("username")) +
+    "&project=" + encodeURIComponent(error) +
+    "&amount=" + encodeURIComponent(document.getElementById("Amount").value);
+
+xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+        // Print the response from the server to the console
+        console.log(xhr.responseText);
+
+        // You can also display the response on the screen if needed
+        var responseElement = document.getElementById("response");
+        if (responseElement) {
+            responseElement.innerHTML = xhr.responseText;
+        }
+    }
+};
+
+// Send the AJAX request
+xhr.send(requestData);
+console.log(requestData);
+
+        var username = document.getElementById("username").value
+        console.log(username)
+        var xumm = new Xumm('1e9144b6-adcf-45ac-bc96-930311f872eb');
+
+
+        var amount = document.getElementById("Amount").value;
+        amount = parseFloat(inputBox.value) * 1000000;
+        amount = String(amount)
+        xumm.payload.createAndSubscribe({
+            TransactionType: 'Payment',
+            Destination: "rBEBELEavHeCmWw4dGjDfLT4JpoHsXJhxB",
+            Amount: amount,
+            Fee: 15,
+        })
+            .then(({ created, resolved }) => {
+            console.log('Payload URL:', created.next.always);
+            console.log('Payload QR:', created.refs.qr_png);
+            console.log(created.response)
+
+
+            // Get the img element by its id
+            var qrCodeImg = document.getElementById("qrCode");
+            var text = document.getElementById("title");
+
+
+            // Set the src attribute of the img element to the QR code URL
+            qrCodeImg.src = created.refs.qr_png;
+
+
+            text.innerText = "Please Scan the QR code to continue"
+
+
+            qrCodeImg.style.display = "block";
+            return resolved;
+            setTimeout(function() {
+            const txInfo = Sdk.getTransaction(txHash);
+            console.log(txinfo)
+
+
+update_payments();
+        }, 5000);
+    })
+        .then(payload => console.log('Payload resolved', payload))
+        .catch(error => {
+        console.error('Error creating the Xumm payload:', error);
+        });
+        }
+            var xhr = new XMLHttpRequest();
+xhr.open("POST", "/includes/update_payment.inc.php", true);
+xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+// Define the data to be sent in the AJAX request
+var requestData = "purchasee=" + encodeURIComponent(localStorage.getItem("username")) +
+    "&project=" + encodeURIComponent("Shinkad") +
+    "&purcharser=" + encodeURIComponent(localStorage.getItem("name")) + 
+    "&amount="+ encodeURIComponent(document.getElementById("Amount").value);
+
+    console.log(requestData);
+
+xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+        // Print the response from the server to the console
+        console.log(xhr.responseText);
+        console.log("done")
+
+        // You can also display the response on the screen if needed
+        var responseElement = document.getElementById("response");
+        if (responseElement) {
+            responseElement.innerHTML = xhr.responseText;
+        }
+    }
+};
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+// Send the AJAX request
+sleep(2000).then(() => {xhr.send(requestData);});
+
+
+        
+
+</script>
+    <!-- Include the Xumm JavaScript library -->
+    <script src="https://xumm.app/assets/cdn/xumm.min.js"></script>
+    <script src="https://unpkg.com/xrpl/build/xrpl-latest-min.js"></script>
+    <script>
+        var email = localStorage.getItem('email');
+
+var inputBox = document.getElementById('Amount');
+var price = ""
+inputBox.onkeyup = function () {
+    price = parseFloat(inputBox.value) * 12.41; // Use parseFloat to handle decimal input
+    price = price * 1.78; 
+    price = price.toFixed(0);; // Round the price to 2 decimal places
+    //price = trunc(price);
+    console.log(price);
+    document.getElementById('ammountablel').innerHTML = price + " XRP";
+}
+
+        var inputBox = document.getElementById('Amount');
+        var image = document.getElementById("qrCode");
+        image.style.display = "none";
+        // Define the createPayment function in the global scope
+// Define the createPayment function in the global scope
+// Define the createPayment function in the global scope
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

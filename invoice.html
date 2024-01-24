@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #invoice {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div id="invoice">
+    <h2>Invoice</h2>
+    <div>
+        <label for="clientName">Client Name:</label>
+        <input type="text" id="clientName" placeholder="Enter client name">
+    </div>
+    <div>
+        <label for="invoiceDate">Invoice Date:</label>
+        <input type="date" id="invoiceDate">
+    </div>
+    <div>
+        <label for="clientEmail">Client Email:</label>
+        <input type="email" id="clientEmail" placeholder="Enter client email">
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody id="invoiceItems">
+            <!-- Invoice items will be added dynamically here -->
+        </tbody>
+    </table>
+    <button onclick="addItem()">Add Item</button>
+    <div>
+        <label for="total">Total:</label>
+        <span id="total">0</span>
+    </div>
+</div>
+<button onclick="sendInvoiceData()">Send Invoice</button>
+<script>
+    let total = 0;
+
+    function addItem() {
+        const itemName = "Shinkad Project";
+        const itemDescription = "Some Carbon Credits from the shinkad project";
+        const quantity = 10;
+        const price = 21.41;
+
+        const itemTotal = quantity * price;
+        total += itemTotal;
+
+        const table = document.getElementById("invoiceItems");
+        const newRow = table.insertRow(-1);
+        const cell1 = newRow.insertCell(0);
+        const cell2 = newRow.insertCell(1);
+        const cell3 = newRow.insertCell(2);
+        const cell4 = newRow.insertCell(3);
+        const cell5 = newRow.insertCell(4);
+
+        cell1.textContent = itemName;
+        cell2.textContent = itemDescription;
+        cell3.textContent = quantity;
+        cell4.textContent = price;
+        cell5.textContent = itemTotal.toFixed(2);
+
+        document.getElementById("total").textContent = total.toFixed(2);
+    }
+</script>
+<script>
+function sendInvoiceData() {
+    const table = document.getElementById("invoiceItems");
+    // get data from the cells
+    const invoicedata = [];
+    for (let i = 0; i < table.rows.length; i++) { // Start from 0 instead of 1
+        const row = table.rows[i];
+        const item = {
+            itemName: row.cells[0].textContent,
+            itemDescription: row.cells[1].textContent,
+            quantity: row.cells[2].textContent,
+            price: row.cells[3].textContent,
+            itemTotal: row.cells[4].textContent
+        };
+        invoicedata.push(item);
+    }
+
+    // Rest of your code...
+
+
+    // Step 2: Create an object with these data to send to the server
+    const data = {
+        clientName: document.getElementById("clientName").value,
+        invoiceDate: document.getElementById("invoiceDate").value,
+        clientEmail: document.getElementById("clientEmail").value,
+        total: document.getElementById("total").textContent,
+        items: invoicedata
+    };
+
+    // Step 3: Convert the object to a JSON string
+    const jsonData = JSON.stringify(data);
+
+    // Step 4: Use fetch to send a POST request to the PHP file with the JSON string as the body
+    fetch('/includes/Sendemail.inc.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: jsonData
+    })
+    // Step 5: Handle the response from the server
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+</script>
+
+</body>
+</html>

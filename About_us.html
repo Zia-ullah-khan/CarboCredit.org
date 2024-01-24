@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/jpg" href="logo.jpg" />
+    <title>About Us - Carbon Credits Trading Company</title>
+    <style>
+        .topnav {
+            
+  background-color: #f2fdef;
+  overflow: hidden;
+  color: black;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    color: black;
+  float: left;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+
+/* Add a color to the active/current link */
+.topnav a:hover {
+  background-color: #04AA6D;
+  color: white;
+
+}
+#logo{
+    width: 45px;
+    float: left;
+    background-color: #f2fdef;
+}
+#login{
+    float: right;
+}
+#SignUP{
+    float: right;
+}
+
+/* Style navigation menu links */
+.topnav a {
+  color: black;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+/* Add a grey background color on mouse-over */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Style the active link (or home/logo) */
+.active {
+  background-color: #04AA6D;
+  color: black;
+}
+
+/* Style the hamburger menu icon */
+.topnav a.icon {
+  float: left; /* Change float to left */
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+/* Media query for larger screens */
+@media screen and (min-width: 601px) {
+    .topnav a.icon {
+        display: none;
+    }
+
+    .topnav #myLinks {
+        display: block;
+    }
+}
+
+/* Adjust the position of the mobile menu */
+@media screen and (max-width: 600px) {
+    .topnav a.icon {
+        text-align: right;
+        float: right;
+    }
+
+    .topnav #myLinks {
+        display: none;
+        position: absolute;
+        top: 60px; /* Adjust the distance from the top as needed */
+        left: 0;
+        width: 100%;
+        background-color: #f2fdef;
+        z-index: 1;
+    }
+
+    .topnav #myLinks a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="topnav">
+        <img id="logo" src="logo.jpg" alt="logo" />
+        <!-- Navigation links (hidden by default) -->
+        <div id="myLinks">
+            <a href="Our_Team">Our Team</a>
+            <a href="#contact">Contact</a>
+            <a href="About_us">About Us</a>
+            <a id="SignUP" href="SignUP">Sign up</a>
+            <a id="login" href="Login">Login</a>
+        </div>
+        <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+    <header>
+        <h1>About Us</h1>
+        <p>Your Trusted Partner in Carbon Credits Trading on XRPL Blockchain</p>
+    </header>
+
+    <section>
+        <h2>Who We Are</h2>
+        <p>
+            Welcome to our platform, where sustainability meets innovation. We are a leading company dedicated to leveraging the power of the XRPL blockchain to facilitate the seamless trading of carbon credits.
+        </p>
+    </section>
+
+    <section>
+        <h2>Our Mission</h2>
+        <p>
+            Our mission is to contribute to a sustainable future by providing a secure and transparent platform for businesses and individuals to trade carbon credits. We believe in the power of blockchain technology to transform the way environmental assets are managed and traded.
+        </p>
+    </section>
+
+    <section>
+        <h2>Why Choose Us?</h2>
+        <p>
+            <strong>Blockchain Technology:</strong> We utilize the XRPL blockchain to ensure transparency, security, and efficiency in carbon credits trading.
+        </p>
+        <p>
+            <strong>Sustainability Focus:</strong> We are committed to promoting environmental sustainability and helping businesses and individuals reduce their carbon footprint.
+        </p>
+        <p>
+            <strong>Experienced Team:</strong> Our team consists of experts in blockchain technology, environmental science, and finance, working together to provide you with the best solutions.
+        </p>
+    </section>
+
+    <section>
+        <h2>Contact Us</h2>
+        <p>
+            If you have any questions or would like to learn more about our services, feel free to contact us at <a href="mailto:Zia.Khan@CarboCredit.org">Zia.Khan@CarboCredit.org</a>.
+        </p>
+    </section>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myLinks");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
