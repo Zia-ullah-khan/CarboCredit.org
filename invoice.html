@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice Generator</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="invoiceScript.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -55,83 +57,6 @@
     </div>
 </div>
 <button onclick="sendInvoiceData()">Send Invoice</button>
-<script>
-    let total = 0;
-
-    function addItem() {
-        const itemName = "Shinkad Project";
-        const itemDescription = "Some Carbon Credits from the shinkad project";
-        const quantity = 10;
-        const price = 21.41;
-
-        const itemTotal = quantity * price;
-        total += itemTotal;
-
-        const table = document.getElementById("invoiceItems");
-        const newRow = table.insertRow(-1);
-        const cell1 = newRow.insertCell(0);
-        const cell2 = newRow.insertCell(1);
-        const cell3 = newRow.insertCell(2);
-        const cell4 = newRow.insertCell(3);
-        const cell5 = newRow.insertCell(4);
-
-        cell1.textContent = itemName;
-        cell2.textContent = itemDescription;
-        cell3.textContent = quantity;
-        cell4.textContent = price;
-        cell5.textContent = itemTotal.toFixed(2);
-
-        document.getElementById("total").textContent = total.toFixed(2);
-    }
-</script>
-<script>
-function sendInvoiceData() {
-    const table = document.getElementById("invoiceItems");
-    // get data from the cells
-    const invoicedata = [];
-    for (let i = 0; i < table.rows.length; i++) { // Start from 0 instead of 1
-        const row = table.rows[i];
-        const item = {
-            itemName: row.cells[0].textContent,
-            itemDescription: row.cells[1].textContent,
-            quantity: row.cells[2].textContent,
-            price: row.cells[3].textContent,
-            itemTotal: row.cells[4].textContent
-        };
-        invoicedata.push(item);
-    }
-
-    // Rest of your code...
-
-
-    // Step 2: Create an object with these data to send to the server
-    const data = {
-        clientName: document.getElementById("clientName").value,
-        invoiceDate: document.getElementById("invoiceDate").value,
-        clientEmail: document.getElementById("clientEmail").value,
-        total: document.getElementById("total").textContent,
-        items: invoicedata
-    };
-
-    // Step 3: Convert the object to a JSON string
-    const jsonData = JSON.stringify(data);
-
-    // Step 4: Use fetch to send a POST request to the PHP file with the JSON string as the body
-    fetch('/includes/Sendemail.inc.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: jsonData
-    })
-    // Step 5: Handle the response from the server
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-}
-</script>
 
 </body>
 </html>
