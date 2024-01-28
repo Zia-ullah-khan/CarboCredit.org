@@ -44,7 +44,7 @@ color: white;
 
 }
 body {
-background-image: url('CC_Background_img.jpeg');
+background-image: url('../picutres/CC_Background_img.jpeg');
 background-repeat: no-repeat;
 background-attachment: fixed;
 background-size: 100% 100%;
